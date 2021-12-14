@@ -9,6 +9,7 @@ import { FamiliaComponent } from 'src/app/components/familia/familia.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
 import { VendedorComponent } from 'src/app/components/vendedor/vendedor.component';
+import { SectorComponent } from './components/sector/sector.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { VendedorComponent } from 'src/app/components/vendedor/vendedor.componen
     ClienteComponent,
     FamiliaComponent,
     VendedorComponent,
+    SectorComponent,
   ],
   imports: [
     BrowserModule,
