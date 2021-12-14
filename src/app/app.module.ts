@@ -4,23 +4,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClienteComponent } from './components/cliente/cliente.component';
-import { FamiliaComponent } from './components/familia/familia.component';
+import { ClienteComponent } from 'src/app/components/cliente/cliente.component';
+import { FamiliaComponent } from 'src/app/components/familia/familia.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from 'src/app/material.module';
+import { VendedorComponent } from 'src/app/components/vendedor/vendedor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteComponent,
-    FamiliaComponent
+    FamiliaComponent,
+    VendedorComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
