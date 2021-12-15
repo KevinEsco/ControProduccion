@@ -8,8 +8,9 @@ import { ClienteComponent } from 'src/app/components/cliente/cliente.component';
 import { FamiliaComponent } from 'src/app/components/familia/familia.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from 'src/app/material.module';
-import { VendedorComponent } from 'src/app/components/vendedor/vendedor.component';
+import { VendedorComponent, VendedorDialogComponent } from 'src/app/components/vendedor/vendedor.component';
 import { SectorComponent } from './components/sector/sector.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,11 @@ import { SectorComponent } from './components/sector/sector.component';
     FamiliaComponent,
     VendedorComponent,
     SectorComponent,
+    VendedorDialogComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
