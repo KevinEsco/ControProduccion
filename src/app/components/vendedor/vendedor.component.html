@@ -1,69 +1,81 @@
-<div>
-  <h1>Vendedor</h1>
+<div fxLayout="column" fxLayoutAlign="space-between none" fxLay>
+  <div>
+    <h1>Vendedores</h1>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between none">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input />
+    </mat-form-field>
+  </div>
+  <div fxLayoutAlign="center">
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="Seleccionar">
+				<th mat-header-cell *matHeaderCellDef>
+					<mat-checkbox (change)="$event ? masterToggle() : null"
+						[checked]="selection.hasValue() && isAllSelected()"
+						[indeterminate]="selection.hasValue() && !isAllSelected()">
+					</mat-checkbox>
+				</th>
+				<td mat-cell *matCellDef="let row">
+					<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+						[checked]="selection.isSelected(row)"></mat-checkbox>
+				</td>
+			</ng-container>
+
+      <ng-container matColumnDef="Cod_Vendedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Cod.Vendedor</th>
+        <td mat-cell *matCellDef="let vendedor">{{ vendedor.Cod_Vendedor }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Nombre_Vendedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+        <td mat-cell *matCellDef="let vendedor">
+          {{ vendedor.Nombre_Vendedor }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Celular_Vendedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
+        <td mat-cell *matCellDef="let vendedor">
+          {{ vendedor.Celular_Vendedor }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Mail_Vendedor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mail</th>
+        <td mat-cell *matCellDef="let vendedor">
+          {{ vendedor.Mail_Vendedor }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_evt_Vendedor)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Eliminar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_mov_parametro)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      
+    </table>
+    
+  </div>
+  <mat-paginator 
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageSize]="10"
+        showFirstLastButtons
+      ></mat-paginator>
 </div>
-
-<!-- <div fxLayoutAlign="center center"><table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <mat-text-column name="Nombre"></mat-text-column>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-  mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="selectedRow = selectedRow === row ? null : row"
-    [ngClass]="{ selected: row === selectedRow }"
-  ></tr>
-</table></div> -->
-<!-- <div fxLayoutAlign="center"> -->
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="Cod_Vendedor">
-      <th mat-header-cell *matHeaderCellDef>Cod.Vendedor</th>
-      <td mat-cell *matCellDef="let vendedor">{{ vendedor.Cod_Vendedor }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Nombre_Vendedor">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let vendedor">
-        {{ vendedor.Nombre_Vendedor }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Celular_Vendedor">
-      <th mat-header-cell *matHeaderCellDef>Telefono</th>
-      <td mat-cell *matCellDef="let vendedor">
-        {{ vendedor.Celular_Vendedor }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Mail_Vendedor">
-      <th mat-header-cell *matHeaderCellDef>Mail</th>
-      <td mat-cell *matCellDef="let vendedor">{{ vendedor.Mail_Vendedor }}</td>
-    </ng-container>
-    <ng-container matColumnDef="Editar">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-mini-fab (click)="openDialog(element.id_evt_Vendedor)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="Eliminar">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-mini-fab (click)="openDialog(element.id_mov_parametro)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-<!-- </div> -->
-
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <mat-text-column name="position"></mat-text-column>
-  <mat-text-column name="name"></mat-text-column>
-  <mat-text-column name="weight"></mat-text-column>
-  <mat-text-column name="symbol"></mat-text-column>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->

@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>
+	{{data.vendedor?.Nombre_Vendedor}}
+</h1>
+
+<h3 mat-dialog-title style="white-space: pre-wrap;">
+	Modificar datos vendedor.
+</h3>
+
+<div mat-dialog-content>
+	<mat-form-field>
+		<mat-label>Codigo Vendedor</mat-label>
+		<input matInput [(ngModel)]="data.vendedor.Cod_Vendedor">
+	</mat-form-field>
+</div>
+
+<div mat-dialog-content>
+	<mat-form-field>
+		<mat-label>Nombre Vendedor</mat-label>
+		<input matInput [(ngModel)]="data.vendedor.Nombre_Vendedor">
+	</mat-form-field>
+</div>
+
+<div mat-dialog-content>
+	<mat-form-field>
+		<mat-label>Celular Vendedor</mat-label>
+		<input matInput [(ngModel)]="data.vendedor.Celular_Vendedor">
+	</mat-form-field>
+</div>
+
+<div mat-dialog-content>
+	<mat-form-field>
+		<mat-label>Correo Vendedor</mat-label>
+		<input matInput [(ngModel)]="data.vendedor.Mail_Vendedor">
+	</mat-form-field>
+</div>
+
+
+<div mat-dialog-actions>
+	<button mat-button (click)="onNoClick()">Cancelar</button>
+	<!-- <button mat-button [mat-dialog-close]="data.valor" cdkFocusInitial>Aceptar</button> -->
+    <button mat-button cdkFocusInitial>Aceptar</button>
+</div>
