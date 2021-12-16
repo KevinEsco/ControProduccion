@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { VendedorComponent, VendedorDialogComponent } from 'src/app/components/vendedor/vendedor.component';
 import { SectorComponent } from './components/sector/sector.component';
 import { FormsModule } from '@angular/forms';
+import { AtributoComponent } from './components/atributo/atributo.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     FamiliaComponent,
     VendedorComponent,
     SectorComponent,
+    AtributoComponent,
     VendedorDialogComponent
   ],
   imports: [

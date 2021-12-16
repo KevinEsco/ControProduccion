@@ -1,5 +1,5 @@
 export interface Sector {
-  idSector: string;
+  idSector: number;
   codigoSector: string;
   descSector: string;
 }
