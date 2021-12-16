@@ -1,0 +1,56 @@
+<div id="titulo">
+  <h1>Atributo</h1>
+</div>
+
+<div class="contenido">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+  </mat-form-field>
+
+  <div fxLayoutAlign="center">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id_min_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Id atributo</th>
+        <td mat-cell *matCellDef="let Sector">{{ Sector.id_min_Atributo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Cod_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Codigo atributo</th>
+        <td mat-cell *matCellDef="let Sector">{{ Sector.Cod_Atributo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Desc_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Descuento atributo</th>
+        <td mat-cell *matCellDef="let Sector">{{ Sector.Desc_Atributo }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Editable_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Editable atributo</th>
+        <td mat-cell *matCellDef="let Sector">
+          {{ Sector.Editable_Atributo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Tipo_dato_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Tipo dato atributo</th>
+        <td mat-cell *matCellDef="let Sector">
+          {{ Sector.Tipo_dato_Atributo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Longitud_Atributo">
+        <th mat-header-cell *matHeaderCellDef>Longitud atributo</th>
+        <td mat-cell *matCellDef="let Sector">
+          {{ Sector.Longitud_Atributo }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="metodoVacio($event)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

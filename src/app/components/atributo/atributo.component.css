@@ -1,0 +1,19 @@
+.selected {
+  background-color: rgba(6, 108, 198, 0.551) !important;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 20%;
+}
+table {
+  width: 100%;
+  margin-bottom: 2rem auto;
+}
+
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background: rgb(232, 232, 232);
+}
