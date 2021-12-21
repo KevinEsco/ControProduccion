@@ -9,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Vendedor } from 'src/app/models/vendedor';
+import { Acciones } from '../Acciones.enum';
+import { VendedorDialogComponent } from './vendedor-dialog.component';
 
 const ELEMENT_DATA = [
   {
@@ -89,6 +91,7 @@ const ELEMENT_DATA = [
   styleUrls: ['./vendedor.component.css'],
 })
 export class VendedorComponent implements OnInit {
+
   displayedColumns: String[] = [
     'Seleccionar',
     'Cod_Vendedor',
@@ -102,13 +105,17 @@ export class VendedorComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   selection = new SelectionModel<Vendedor>(true, []);
-
+  mostrarCargando: boolean = false;
+  AccionesEnum = Acciones
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.openDialog(2,this.AccionesEnum.Ver)
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    var numSelected = this.selection.selected.length;
   }
 
   applyFilter(event: Event) {
@@ -116,14 +123,28 @@ export class VendedorComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(id_evt_Vendedor: number): void {
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.dataSource.data.forEach((row) => this.selection.select(row));
+    }
+  }
+
+  openDialogModificar(id_evt_Vendedor: number): void {
     const vendedor = this.dataSource.data.find(
       (vendedor) => vendedor.id_evt_Vendedor === id_evt_Vendedor
     );
 
     const dialogRef = this.dialog.open(VendedorDialogComponent, {
       maxWidth: '600px',
-      data: { vendedor: vendedor },
+      data: { vendedor: vendedor, tipoDialogo: 'Modificar', editable: true },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -157,33 +178,83 @@ export class VendedorComponent implements OnInit {
       // }
     });
   }
+  openDialog(id_evt_Vendedor: number, accion: Acciones): void {
+    const vendedor = this.dataSource.data.find(
+      (vendedor) => vendedor.id_evt_Vendedor === id_evt_Vendedor
+    );
+    const dialogRef = this.dialog.open(VendedorDialogComponent, {
+      maxWidth: '600px',
+      data: { vendedor: vendedor, tipoDialogo: accion, editable: false },
+    });
+  }
+  openDialogVer(id_evt_Vendedor: number): void {
+    const vendedor = this.dataSource.data.find(
+      (vendedor) => vendedor.id_evt_Vendedor === id_evt_Vendedor
+    );
 
-  isAllSelected() {
-	const numSelected = this.selection.selected.length;
-	const numRows = this.dataSource.data.length;
-	return numSelected === numRows;
-}
+    const dialogRef = this.dialog.open(VendedorDialogComponent, {
+      maxWidth: '600px',
+      data: { vendedor: vendedor, tipoDialogo: 'Ver', editable: false },
+    });
 
-masterToggle() {
-	if (this.isAllSelected()) {
-		this.selection.clear()
-	} else {
-		this.dataSource.data.forEach(row => this.selection.select(row))
-	}
-}
-}
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // if (vendedor.Tipo_vendedor == 'N') {
+        // 	var correcto = true;
+        // 	if (isNaN(result)) {
+        // 		correcto = false
+        // 	} else {
+        // 		const minimo = Number.parseFloat(vendedor.Minimo_vendedor);
+        // 		const maximo = Number.parseFloat(vendedor.Maximo_vendedor);
+        // 		const value = Number.parseFloat(result);
+        // 		if (minimo && (value < minimo)) correcto = false
+        // 		if (maximo && (value > maximo)) correcto = false
+        // 	}
+        // 	if (!correcto) {
+        // 		alert('El vendedor ingresado no es valido');
+        // 		vendedor.Valor_vendedor = this.viejoValor;
+        // 	} else {
+        // 		this.nuevoValor = result;
+        // 	}
+        // } else {
+        // 	this.nuevoValor = result;
+        // }
+      }
 
-@Component({
-  selector: 'app-vendedor-dialog',
-  templateUrl: './vendedor-dialog.component.html',
-})
-export class VendedorDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<VendedorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { vendedor: Vendedor }
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+      // if (this.nuevoValor) {
+      // 	this.http.put(this.config.getServerUrl() + '/vendedor/' + vendedor.id_mov_vendedor, { valor: this.nuevoValor, tipo: vendedor.Tipo_vendedor }).subscribe(res => {
+      // 		this.recargarLista();
+      // 	});
+      // }
+    });
+  }
+  openDialogEliminar(id_evt_Vendedor: number): void {
+    var vendedor = this.dataSource.data.find(
+      (vendedor) => vendedor.id_evt_Vendedor === id_evt_Vendedor
+    );
+    const dialogRef = this.dialog.open(VendedorDialogComponent, {
+      maxWidth: '50%',
+      maxHeight: '80%',
+      data: { vendedor: vendedor, tipoDialogo: 'Eliminar', editable: false },
+    });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result) {
+    //     this.http
+    //       .delete(this.config.getServerUrl() + '/usuario/id/' + id_evt_Vendedor)
+    //       .subscribe(
+    //         (res) => {
+    //           this._snackBar.open('Cambio/s aplicado/s', '', {
+    //             duration: 3000,
+    //           });
+    //           this.buscarUsuariosWeb();
+    //         },
+    //         (err) => {
+    //           this._snackBar.open('Error : Por favor reintentar', '', {
+    //             duration: 3000,
+    //           });
+    //         }
+    //       );
+    //   }
+    // });
   }
 }

@@ -1,81 +1,103 @@
-<div fxLayout="column" fxLayoutAlign="space-between none" fxLay>
-  <div>
-    <h1>Vendedores</h1>
-  </div>
+<div contenido>
+  <div fxLayout="column" fxLayoutAlign="space-between none">
+    <div>
+      <h1>Vendedores</h1>
 
-  <div fxLayout="row" fxLayoutAlign="space-between none">
-    <mat-form-field appearance="outline">
-      <mat-label>Filtrar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" #input />
-    </mat-form-field>
-  </div>
-  <div fxLayoutAlign="center">
-    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+    </div>
 
-      <ng-container matColumnDef="Seleccionar">
-				<th mat-header-cell *matHeaderCellDef>
-					<mat-checkbox (change)="$event ? masterToggle() : null"
-						[checked]="selection.hasValue() && isAllSelected()"
-						[indeterminate]="selection.hasValue() && !isAllSelected()">
-					</mat-checkbox>
-				</th>
-				<td mat-cell *matCellDef="let row">
-					<mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-						[checked]="selection.isSelected(row)"></mat-checkbox>
-				</td>
-			</ng-container>
-
-      <ng-container matColumnDef="Cod_Vendedor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header >Cod.Vendedor</th>
-        <td mat-cell *matCellDef="let vendedor">{{ vendedor.Cod_Vendedor }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="Nombre_Vendedor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-        <td mat-cell *matCellDef="let vendedor">
-          {{ vendedor.Nombre_Vendedor }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Celular_Vendedor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
-        <td mat-cell *matCellDef="let vendedor">
-          {{ vendedor.Celular_Vendedor }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Mail_Vendedor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mail</th>
-        <td mat-cell *matCellDef="let vendedor">
-          {{ vendedor.Mail_Vendedor }}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="Editar">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab (click)="openDialog(element.id_evt_Vendedor)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="Eliminar">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab (click)="openDialog(element.id_mov_parametro)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-      
-    </table>
     
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+      <mat-form-field appearance="outline">
+        <mat-label>Filtrar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input />
+      </mat-form-field>
+      <mat-card style="width: 20%" *ngIf="this.selection.selected.length != 0">Seleccionados: {{this.selection.selected.length}}</mat-card>
+    </div>
+    <div fxLayoutAlign="center">
+      <mat-progress-bar
+        mode="indeterminate"
+        *ngIf="mostrarCargando"
+      ></mat-progress-bar>
+      <table
+        mat-table
+        matSort
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="Seleccionar">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+            ></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Cod_Vendedor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Cod.Vendedor
+          </th>
+          <td mat-cell *matCellDef="let vendedor">
+            {{ vendedor.Cod_Vendedor }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Nombre_Vendedor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let vendedor">
+            {{ vendedor.Nombre_Vendedor }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Celular_Vendedor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
+          <td mat-cell *matCellDef="let vendedor">
+            {{ vendedor.Celular_Vendedor }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Mail_Vendedor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mail</th>
+          <td mat-cell *matCellDef="let vendedor">
+            {{ vendedor.Mail_Vendedor }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Editar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab (click)="openDialog(element.id_evt_Vendedor, AccionesEnum.Modificar)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Eliminar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              (click)="openDialog(element.id_evt_Vendedor, AccionesEnum.Eliminar)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="openDialog(2,AccionesEnum.Ver)"  *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="10"
+      showFirstLastButtons
+    ></mat-paginator>
   </div>
-  <mat-paginator 
-        [pageSizeOptions]="[5, 10, 20]"
-        [pageSize]="10"
-        showFirstLastButtons
-      ></mat-paginator>
 </div>

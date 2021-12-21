@@ -1,3 +1,13 @@
+
+
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background: rgb(232, 232, 232);
+}
+
 table{
   width: 100%;
 }

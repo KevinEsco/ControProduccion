@@ -2,41 +2,43 @@
 	{{data.vendedor?.Nombre_Vendedor}}
 </h1>
 
+<button mat-button *ngIf="(data.tipoDialogo === AccionesEnum.Ver)" (click)="data.tipoDialogo = AccionesEnum.Modificar">Editar</button>
+
 <h3 mat-dialog-title style="white-space: pre-wrap;">
-	Modificar datos vendedor.
+	{{AccionesEnum[data.tipoDialogo]}} datos vendedor.
 </h3>
 
 <div mat-dialog-content>
 	<mat-form-field>
 		<mat-label>Codigo Vendedor</mat-label>
-		<input matInput [(ngModel)]="data.vendedor.Cod_Vendedor">
+		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Cod_Vendedor">
 	</mat-form-field>
 </div>
 
 <div mat-dialog-content>
-	<mat-form-field>
+	<mat-form-field >
 		<mat-label>Nombre Vendedor</mat-label>
-		<input matInput [(ngModel)]="data.vendedor.Nombre_Vendedor">
+		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Nombre_Vendedor">
 	</mat-form-field>
 </div>
 
-<div mat-dialog-content>
+<div mat-dialog-content >
 	<mat-form-field>
 		<mat-label>Celular Vendedor</mat-label>
-		<input matInput [(ngModel)]="data.vendedor.Celular_Vendedor">
+		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Celular_Vendedor">
 	</mat-form-field>
 </div>
 
-<div mat-dialog-content>
+<div mat-dialog-content >
 	<mat-form-field>
-		<mat-label>Correo Vendedor</mat-label>
-		<input matInput [(ngModel)]="data.vendedor.Mail_Vendedor">
+		<mat-label >Correo Vendedor</mat-label>
+		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Mail_Vendedor">
 	</mat-form-field>
 </div>
 
 
-<div mat-dialog-actions>
-	<button mat-button (click)="onNoClick()">Cancelar</button>
+<div mat-dialog-actions >
+	<button mat-button (click)="onNoClick()" [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true">Cancelar</button>
 	<!-- <button mat-button [mat-dialog-close]="data.valor" cdkFocusInitial>Aceptar</button> -->
     <button mat-button cdkFocusInitial>Aceptar</button>
 </div>
