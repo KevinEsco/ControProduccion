@@ -1,0 +1,72 @@
+<h1 mat-dialog-title class="titulo">
+  {{ data.cliente?.Nombre_Cliente }}
+</h1>
+
+<h3 mat-dialog-title style="white-space: pre-wrap">
+  {{ AccionesEnum[data.tipoDialogo] }} datos cliente.
+  <button
+    mat-stroked-button color="accent"
+    *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+    (click)="data.tipoDialogo = AccionesEnum.Modificar"
+    style="margin-left: 50px"
+  >
+    Editar
+  </button>
+</h3>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nombre cliente</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Nombre_Cliente"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>DNI cliente</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.NumeroDocumento_Cliente"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Iva</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.TipoIVA_Cliente"
+    />
+  </mat-form-field>
+</div>
+
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Email cliente</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Mail_Inicio_Prod"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions class="botones">
+  <button
+    mat-stroked-button color="accent"
+    (click)="onNoClick()"
+    class="titulo"
+    [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+  >
+    Cancelar
+  </button>
+  <button mat-stroked-button color="accent" cdkFocusInitial class="titulo">Aceptar</button>
+</div>

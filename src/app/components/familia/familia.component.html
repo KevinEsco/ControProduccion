@@ -1,3 +1,58 @@
-<p>
-  familia works!
-</p>
+<div id="titulo">
+  <h1>Familia</h1>
+</div>
+
+<div class="contenido">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+  </mat-form-field>
+
+  <div fxLayoutAlign="center">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="Cod_Familia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Codigo Familia
+        </th>
+        <td mat-cell *matCellDef="let familia">{{ familia.Cod_Familia }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Desc_Familia">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+        <td mat-cell *matCellDef="let familia">{{ familia.Desc_Familia }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-mini-fab
+            (click)="openDialog(element.id_min_Familia, AccionesEnum.Modificar)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Eliminar">
+        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-mini-fab
+            (click)="openDialog(element.id_min_Familia, AccionesEnum.Eliminar)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="openDialog(row.id_min_Familia, AccionesEnum.Ver)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

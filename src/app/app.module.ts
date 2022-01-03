@@ -13,6 +13,10 @@ import { SectorComponent } from './components/sector/sector.component';
 import { FormsModule } from '@angular/forms';
 import { AtributoComponent } from './components/atributo/atributo.component';
 import { VendedorDialogComponent } from './components/vendedor/vendedor-dialog.component';
+import { SectorDialogComponent } from './components/sector/sector-dialog.component';
+import { AtributoDialogComponent } from './components/atributo/atributo-dialog.component';
+import { ClienteDialogComponent } from './components/cliente/cliente-dialog.component';
+import { FamiliaDialogComponent } from './components/familia/familia-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { VendedorDialogComponent } from './components/vendedor/vendedor-dialog.c
     VendedorComponent,
     SectorComponent,
     AtributoComponent,
-    VendedorDialogComponent
+    VendedorDialogComponent,
+    SectorDialogComponent,
+    AtributoDialogComponent,
+    ClienteDialogComponent,
+    FamiliaDialogComponent,
   ],
   imports: [
     BrowserModule,

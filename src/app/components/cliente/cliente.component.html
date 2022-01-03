@@ -1,54 +1,64 @@
-<div>
-  <h1>Clientes</h1>
+<div id="titulo">
+  <h1>cliente</h1>
 </div>
 
-<!-- <div fxLayoutAlign="center center"><table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <mat-text-column name="Nombre"></mat-text-column>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-  mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="selectedRow = selectedRow === row ? null : row"
-    [ngClass]="{ selected: row === selectedRow }"
-  ></tr>
-</table></div> -->
-<div fxLayoutAlign="center"><table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="Nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.Nombre}} </td>
-  </ng-container>
-  
-  <ng-container matColumnDef="DNI">
-    <th mat-header-cell *matHeaderCellDef> DNI </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.DNI}} </td>
-  </ng-container>
+<div class="contenido">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+  </mat-form-field>
 
-  <ng-container matColumnDef="IVA">
-    <th mat-header-cell *matHeaderCellDef> IVA </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.IVA}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Email">
-    <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let cliente"> {{cliente.Email}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr
-  mat-row
-    *matRowDef="let row; columns: displayedColumns"
-    (click)="onRowClicked(row)" 
-[ngClass]="{highlighted: selectedIndex === row.key}" 
-(mouseover)="highlight(row)"></tr>
-</table></div>
-
-
-
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <mat-text-column name="position"></mat-text-column>
-  <mat-text-column name="name"></mat-text-column>
-  <mat-text-column name="weight"></mat-text-column>
-  <mat-text-column name="symbol"></mat-text-column>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
+  <div fxLayoutAlign="center">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="Nombre_Cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre cliente</th>
+        <td mat-cell *matCellDef="let cliente">{{ cliente.Nombre_Cliente }}</td>
+      </ng-container>
+      <ng-container matColumnDef="NumeroDocumento_Cliente" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numero Documento cliente</th>
+        <td mat-cell *matCellDef="let cliente">
+          {{ cliente.NumeroDocumento_Cliente }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="TipoIVA_Cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo IVA cliente</th>
+        <td mat-cell *matCellDef="let cliente">
+          {{ cliente.TipoIVA_Cliente }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Mail_Inicio_Prod">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email cliente</th>
+        <td mat-cell *matCellDef="let cliente">
+          {{ cliente.Mail_Inicio_Prod }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_evt_Cliente, AccionesEnum.Modificar)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Eliminar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_evt_Cliente, AccionesEnum.Eliminar)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="openDialog(row.id_evt_Cliente, AccionesEnum.Ver)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

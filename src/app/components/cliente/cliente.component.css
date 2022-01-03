@@ -1,11 +1,20 @@
-.selected {
-    background-color: rgba(6, 108, 198, 0.551) !important;
-}
-
-/* .mat-row:nth-child(even) {
-    background-color: #e4f0ec;
-}
-
-.mat-row:nth-child(odd) {
-    background-color: #ffffff;
-} */    
+.mat-form-field {
+    font-size: 16px;
+    width: 90%;
+  }
+  table {
+    width: 100%;
+    margin-bottom: 2rem auto;
+  }
+  .mat-row .mat-cell {
+    cursor: pointer;
+  }
+  .mat-row:hover .mat-cell {
+    background: rgb(232, 232, 232);
+  }
+  .titulo{
+    text-align: center;
+  }
+  .botones{
+    justify-content: center;
+  }

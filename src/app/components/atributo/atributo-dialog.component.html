@@ -1,0 +1,74 @@
+<h1 mat-dialog-title class="titulo">
+  {{ data.atributo?.Desc_Atributo }}
+</h1>
+
+<h3 mat-dialog-title style="white-space: pre-wrap">
+  {{ AccionesEnum[data.tipoDialogo] }} datos atributo.
+  <button
+    mat-stroked-button color="accent"
+    *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+    (click)="data.tipoDialogo = AccionesEnum.Modificar"
+    style="margin-left: 50px">
+    Editar
+  </button>
+</h3>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Codigo atributo</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.atributo.Cod_Atributo"/>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Descripcion Atributo</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.atributo.Desc_Atributo"/>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Atributo editable</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.atributo.Editable_Atributo"/>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Tipo dato atributo</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.atributo.Tipo_dato_Atributo"/>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Longitud atributo</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.atributo.Longitud_Atributo"/>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions class="botones">
+  <button
+    mat-stroked-button color="accent"
+    (click)="onNoClick()"
+    [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true">
+    Cancelar
+  </button>
+  <button mat-stroked-button color="accent" cdkFocusInitial class="titulo">Aceptar</button>
+</div>

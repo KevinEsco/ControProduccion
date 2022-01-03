@@ -9,41 +9,55 @@
   </mat-form-field>
 
   <div fxLayoutAlign="center">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="id_min_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Id atributo</th>
-        <td mat-cell *matCellDef="let Sector">{{ Sector.id_min_Atributo }}</td>
-      </ng-container>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       <ng-container matColumnDef="Cod_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Codigo atributo</th>
-        <td mat-cell *matCellDef="let Sector">{{ Sector.Cod_Atributo }}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo atributo</th>
+        <td mat-cell *matCellDef="let Atributo">{{ Atributo.Cod_Atributo }}</td>
       </ng-container>
-      <ng-container matColumnDef="Desc_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Descuento atributo</th>
-        <td mat-cell *matCellDef="let Sector">{{ Sector.Desc_Atributo }}</td>
+      <ng-container matColumnDef="Desc_Atributo" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descuento atributo</th>
+        <td mat-cell *matCellDef="let Atributo">
+          {{ Atributo.Desc_Atributo }}
+        </td>
       </ng-container>
       <ng-container matColumnDef="Editable_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Editable atributo</th>
-        <td mat-cell *matCellDef="let Sector">
-          {{ Sector.Editable_Atributo }}
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Editable atributo</th>
+        <td mat-cell *matCellDef="let Atributo">
+          {{ Atributo.Editable_Atributo }}
         </td>
       </ng-container>
       <ng-container matColumnDef="Tipo_dato_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Tipo dato atributo</th>
-        <td mat-cell *matCellDef="let Sector">
-          {{ Sector.Tipo_dato_Atributo }}
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo dato atributo</th>
+        <td mat-cell *matCellDef="let Atributo">
+          {{ Atributo.Tipo_dato_Atributo }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="Longitud_Atributo">
-        <th mat-header-cell *matHeaderCellDef>Longitud atributo</th>
-        <td mat-cell *matCellDef="let Sector">
-          {{ Sector.Longitud_Atributo }}
+      <ng-container matColumnDef="Longitud_Atributo" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Longitud atributo</th>
+        <td mat-cell *matCellDef="let Atributo">
+          {{ Atributo.Longitud_Atributo }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_min_Atributo, AccionesEnum.Modificar)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Eliminar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_min_Atributo, AccionesEnum.Eliminar)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
         mat-row
-        (click)="metodoVacio($event)"
+        (click)="openDialog(row.id_min_Atributo , AccionesEnum.Ver)"
         *matRowDef="let row; columns: displayedColumns"
       ></tr>
     </table>

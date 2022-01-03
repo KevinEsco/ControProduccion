@@ -2,14 +2,16 @@ import { Component,Inject, OnInit, ViewChild } from '@angular/core';
 import { ClienteMaterialModule } from 'src/app/components/cliente/cliente.material.module';
 import { Sector } from 'src/app/models/sector';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Acciones } from '../Acciones.enum';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { SectorDialogComponent } from './sector-dialog.component';
 
 const ELEMENT_DATA = [
   { idSector: 1, codigoSector: '1001', descSector: 'Sector 01' },
@@ -34,18 +36,15 @@ const ELEMENT_DATA = [
   styleUrls: ['./sector.component.css'],
 })
 export class SectorComponent implements OnInit {
-  displayedColumns: string[] = ['idSector', 'codigoSector', 'descSector'];
-  //dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['codigoSector', 'descSector', 'Editar', 'Eliminar',];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   selection = new SelectionModel<Sector>(true, []);
-  dialog: any;
-  
-  constructor() {}
+  AccionesEnum = Acciones
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
-      
   }
 
   ngAfterViewInit() {
@@ -58,45 +57,13 @@ export class SectorComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(idSector: number): void {
-    const sector = this.dataSource.data.find(
-      (sector) => sector.idSector === idSector
+  openDialog(pIdSector: number, accion: Acciones): void {
+    const sector2 = this.dataSource.data.find(
+      (sector) => sector.idSector === pIdSector
     );
-
     const dialogRef = this.dialog.open(SectorDialogComponent, {
-      maxWidth: '600px',
-      data: { sector: sector },
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        // if (vendedor.Tipo_vendedor == 'N') {
-        // 	var correcto = true;
-        // 	if (isNaN(result)) {
-        // 		correcto = false
-        // 	} else {
-        // 		const minimo = Number.parseFloat(vendedor.Minimo_vendedor);
-        // 		const maximo = Number.parseFloat(vendedor.Maximo_vendedor);
-        // 		const value = Number.parseFloat(result);
-        // 		if (minimo && (value < minimo)) correcto = false
-        // 		if (maximo && (value > maximo)) correcto = false
-        // 	}
-        // 	if (!correcto) {
-        // 		alert('El vendedor ingresado no es valido');
-        // 		vendedor.Valor_vendedor = this.viejoValor;
-        // 	} else {
-        // 		this.nuevoValor = result;
-        // 	}
-        // } else {
-        // 	this.nuevoValor = result;
-        // }
-      }
-
-      // if (this.nuevoValor) {
-      // 	this.http.put(this.config.getServerUrl() + '/vendedor/' + vendedor.id_mov_vendedor, { valor: this.nuevoValor, tipo: vendedor.Tipo_vendedor }).subscribe(res => {
-      // 		this.recargarLista();
-      // 	});
-      // }
+      minWidth: '400px',
+      data: { sector: sector2, tipoDialogo: accion },
     });
   }
 
@@ -118,15 +85,5 @@ masterToggle() {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
   }  
-}
 
-export class SectorDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<SectorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { sector: Sector }
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 }
