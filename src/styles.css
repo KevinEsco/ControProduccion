@@ -1,7 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	/* font-family: Roboto, "Helvetica Neue", sans-serif; */
+}
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
@@ -11,12 +15,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 		border: 0px;
 		vertical-align: middle;
 	}
+
 	table.mat-table tr.mat-row {
 		border-bottom: 5px solid #ddd;
 		display: block;
 		padding: 0px 10px;
-		height: max-content;
+		height: max-content !important;
 	}
+
 	table.mat-table td.mat-cell {
 		border-bottom: 1px solid #ddd;
 		display: block;
@@ -25,9 +31,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 		height: max-content;
 		min-height: 20px;
 	}
+
 	table.mat-table td.mat-cell:last-child {
 		border-bottom: 0;
 	}
+
 	table.mat-table td.mat-cell:before {
 		content: attr(data-label);
 		float: left;
@@ -35,28 +43,41 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 		font-weight: bold;
 		margin-right: 5px;
 	}
+
 	table.mat-table td.mat-cell:not([data-label]) {
 		text-align: center;
 	}
+
 	th.mat-header-cell {
 		display: none;
 	}
+
 	tr.mat-header-row {
 		display: none;
 	}
-	form {
-		display: block!important;
+
+	.row-sm {
+		display: block !important;
 		text-align: center;
 	}
+
 	.referencias {
-		margin-left: 75%!important;
+		margin-left: 75% !important;
 		width: 200px;
 	}
 }
-html, body { height: 100%; }
 
-.contenido{
-    width: 90%;
-    margin:1rem auto;
+html, body {
+	height: 100%;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.contenido {
+	width: 90%;
+	margin: 1rem auto;
+	margin-top: 20px;
+	z-index: -1;
+}
+
+.mat-table {
+	width: 100%;
+}
