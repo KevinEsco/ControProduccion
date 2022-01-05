@@ -1,0 +1,53 @@
+<mat-toolbar
+  class="sticky"
+  color="accent"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <!-- *ngIf="authService.isAuthenticated()" -->
+    <button fxHide.gt-sm mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <button mat-button><span>Ctrl. Produccion</span></button>
+
+    <div fxHide.lt-md *ngFor="let item of menu">
+      <!-- Handle branch node buttons here -->
+
+      <span *ngIf="item.items && item.items.length > 0">
+        <button mat-button [matMenuTriggerFor]="menu.subMenu">
+          <!-- *ngIf="authService.isAuthenticated()" -->
+          <button mat-button [matMenuTriggerFor]="menu.subMenu"></button>
+          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <span class="text-menu">{{ item.label }}</span>
+        </button>
+        <app-header-menu-item #menu [items]="item.items"></app-header-menu-item>
+      </span>
+
+      <!-- Leaf node buttons here -->
+
+      <span *ngIf="!item.items || item.items.length === 0">
+        <button mat-button [routerLink]="item.link">
+          <!-- *ngIf="authService.isAuthenticated()" -->
+          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <span class="text-menu">{{ item.label }}</span>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div class="theme-button" fxLayout="row" fxLayoutAlign="center">
+      <mat-icon>format_color_fill</mat-icon>
+      <mat-slide-toggle
+        [(ngModel)]="isDarkTheme"
+        (change)="onThemeChange()"
+      ></mat-slide-toggle>
+    </div>
+
+    <!-- <button mat-button *ngIf="authService.isAuthenticated()" (click)="logOut()">
+			<mat-icon>exit_to_app</mat-icon>
+			<span fxHide.xs>Salir</span>
+		</button> -->
+  </div>
+</mat-toolbar>
