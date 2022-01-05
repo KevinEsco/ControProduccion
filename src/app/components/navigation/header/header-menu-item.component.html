@@ -1,0 +1,18 @@
+<mat-menu #subMenu="matMenu" [overlapTrigger]="false">
+  <span *ngFor="let item of items">
+    <span *ngIf="item.items && item.items.length > 0">
+      <button mat-menu-item color="primary" [matMenuTriggerFor]="menu.subMenu">
+        <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </button>
+      <app-header-menu-item #menu [items]="item.items"></app-header-menu-item>
+    </span>
+
+    <span *ngIf="!item.items || item.items.length === 0">
+      <button mat-menu-item [routerLink]="item.link">
+        <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </button>
+    </span>
+  </span>
+</mat-menu>

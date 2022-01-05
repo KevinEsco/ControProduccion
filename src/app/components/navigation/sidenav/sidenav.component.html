@@ -1,0 +1,33 @@
+<ng-material-multilevel-menu [items]="menu" [configuration]="config">
+  <ng-template #listTemplate let-item="item" let-configuration="configuration">
+    <div
+      class="mat-drawer-container my-cool-menu-item"
+      [dir]="configuration.rtlLayout ? 'rtl' : 'ltr'"
+    >
+      <div class="title-and-image">
+        <div class="icon-container">
+          <mat-icon *ngIf="item.icon">
+            {{ item.icon }}
+          </mat-icon>
+        </div>
+        <div class="label-container">
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+      <div class="icon-arrow-container" *ngIf="item.hasChilden">
+        <mat-icon
+          *ngIf="!configuration.rtlLayout"
+          [@ExpandedLTR]="item.expanded ? 'yes' : 'no'"
+        >
+          keyboard_arrow_down
+        </mat-icon>
+        <mat-icon
+          *ngIf="configuration.rtlLayout"
+          [@ExpandedRTL]="item.expanded ? 'yes' : 'no'"
+        >
+          keyboard_arrow_down
+        </mat-icon>
+      </div>
+    </div>
+  </ng-template>
+</ng-material-multilevel-menu>
