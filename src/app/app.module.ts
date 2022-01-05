@@ -18,6 +18,20 @@ import { AtributoDialogComponent } from './components/atributo/atributo-dialog.c
 import { ClienteDialogComponent } from './components/cliente/cliente-dialog.component';
 import { FamiliaDialogComponent } from './components/familia/familia-dialog.component';
 
+import { UniquePipe } from './components/vendedor/unique.pipe';
+import {
+  HeaderComponent,
+  HeaderMenuItemComponent,
+} from './components/navigation/header/header.component';
+import { ThemeService } from './services/theming/theme.service';
+import {
+  NgMaterialMultilevelMenuModule,
+  MultilevelMenuService,
+} from 'ng-material-multilevel-menu';
+import { HttpClientModule } from '@angular/common/http';
+import { StyleManagerService } from './services/theming/style-manager.service';
+import { SidenavComponent } from './components/navigation/sidenav/sidenav.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +45,10 @@ import { FamiliaDialogComponent } from './components/familia/familia-dialog.comp
     AtributoDialogComponent,
     ClienteDialogComponent,
     FamiliaDialogComponent,
+    SidenavComponent,
+    HeaderComponent,
+    HeaderMenuItemComponent,
+    UniquePipe,
   ],
   imports: [
     BrowserModule,
@@ -39,9 +57,10 @@ import { FamiliaDialogComponent } from './components/familia/familia-dialog.comp
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-  
+    HttpClientModule,
+    NgMaterialMultilevelMenuModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ThemeService, MultilevelMenuService, StyleManagerService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
