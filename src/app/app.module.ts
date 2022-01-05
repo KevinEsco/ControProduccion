@@ -31,6 +31,8 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { StyleManagerService } from './services/theming/style-manager.service';
 import { SidenavComponent } from './components/navigation/sidenav/sidenav.component';
+import { ClienteDomicilioComponent } from './components/cliente domicilio/clienteDomicilio.component';
+import { ClienteDomicilioDialogComponent } from './components/cliente domicilio/clienteDomicilio-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { SidenavComponent } from './components/navigation/sidenav/sidenav.compon
     AtributoDialogComponent,
     ClienteDialogComponent,
     FamiliaDialogComponent,
+    ClienteDomicilioComponent,
+    ClienteDomicilioDialogComponent,
     SidenavComponent,
     HeaderComponent,
     HeaderMenuItemComponent,

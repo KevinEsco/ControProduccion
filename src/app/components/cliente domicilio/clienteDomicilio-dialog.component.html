@@ -1,0 +1,138 @@
+<div class="container">
+  <button class="btnCerrar" (click)="onNoClick()">x</button>
+  <h1 mat-dialog-title class="titulo-dialog">
+  {{ data.cliente?.Mail_Despacho }}
+</h1>
+
+<div fxLayout="row" fxLayoutAlign="space-evenly center" class="btn-dialog">
+  <button
+    mat-stroked-button
+    color="accent"
+    *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+    (click)="data.tipoDialogo = AccionesEnum.Modificar"
+  >
+    Editar
+  </button>
+  <button
+    mat-stroked-button
+    color="warn"
+    *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+    (click)="data.tipoDialogo = AccionesEnum.Eliminar"
+  >
+    Eliminar
+  </button>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Domicilio</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Domicilio_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Localidad</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Localidad_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Codigo Postal</mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.CPostal_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Provincia </mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Provincia_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Pais </mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Pais_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Email despacho </mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Mail_Despacho"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Telefono </mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Telefono_Cliente_Domicilio"
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Domicilio central </mat-label>
+    <input
+      matInput
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+      [(ngModel)]="data.cliente.Domicilio_Central_Cliente"
+    />
+  </mat-form-field>
+</div>
+
+<div
+mat-dialog-actions
+class="btn-dialog"
+fxLayoutAlign="space-evenly center"
+*ngIf="data.tipoDialogo !== AccionesEnum.Ver"
+>
+<button
+  mat-stroked-button
+  color="accent"
+  (click)="onNoClick()"
+  [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+>
+  Cancelar
+</button>
+<!-- <button mat-button [mat-dialog-close]="data.valor" cdkFocusInitial>Aceptar</button> -->
+<button
+  mat-stroked-button
+  color="accent"
+  [mat-dialog-close]
+  cdkFocusInitial
+>
+  Aceptar
+</button>
+</div>
+</div>

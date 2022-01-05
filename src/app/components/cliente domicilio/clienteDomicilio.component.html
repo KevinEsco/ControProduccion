@@ -1,0 +1,89 @@
+<div id="titulo">
+  <h1>clienteDomicilio</h1>
+</div>
+
+<div class="contenido">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+  </mat-form-field>
+
+  <div fxLayoutAlign="center">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="Domicilio_Cliente_Domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio cliente</th>
+        <td mat-cell *matCellDef="let cliente">
+          {{ cliente.Domicilio_Cliente_Domicilio }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Localidad_Cliente_Domicilio" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Localidad cliente</th>
+        <td mat-cell *matCellDef="let cliente">
+          {{ cliente.Localidad_Cliente_Domicilio }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="CPostal_Cliente_Domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo Postal cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.CPostal_Cliente_Domicilio }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Provincia_Cliente_Domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Provincia cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.Provincia_Cliente_Domicilio }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Pais_Cliente_Domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Pais_Cliente cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.Pais_Cliente_Domicilio }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Mail_Despacho">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mail despacho cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.Mail_Despacho }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Telefono_Cliente_Domicilio">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.Telefono_Cliente_Domicilio }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Domicilio_Central_Cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio central cliente</th>
+        <td mat-cell *matCellDef="let clienteDomicilio">
+          {{ clienteDomicilio.Domicilio_Central_Cliente }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_evt_Cliente, AccionesEnum.Modificar)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Eliminar">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab (click)="openDialog(element.id_evt_Cliente, AccionesEnum.Eliminar)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="openDialog(row.id_evt_Cliente, AccionesEnum.Ver)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
