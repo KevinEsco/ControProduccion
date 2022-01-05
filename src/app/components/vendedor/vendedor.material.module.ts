@@ -27,7 +27,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatRippleModule} from '@angular/material/core';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { UniquePipe } from './unique.pipe';
 const materialModules = [
 	MatMomentDateModule,
 	MatButtonModule,
@@ -52,6 +53,7 @@ const materialModules = [
 	MatSnackBarModule,
 	MatSortModule,
 	MatTableModule,
+	MatTableDataSource,
 	MatToolbarModule,
 	MatTableExporterModule,
 	MatTooltipModule,
@@ -61,5 +63,8 @@ const materialModules = [
 @NgModule({
 	imports: [CommonModule, ...materialModules],
 	exports: [...materialModules],
+   declarations: [
+    "UniquePipe"
+  ],
 })
 export class VendedorMaterialModule { }

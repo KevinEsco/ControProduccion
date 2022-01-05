@@ -1,44 +1,94 @@
-<h1 mat-dialog-title>
-	{{data.vendedor?.Nombre_Vendedor}}
-</h1>
+<div class="container">
+  <button class="btnCerrar" (click)="onNoClick()">x</button>
+  <h1 mat-dialog-title class="titulo-dialog">
+    {{ data.vendedor?.Nombre_Vendedor }}
+  </h1>
 
-<button mat-button *ngIf="(data.tipoDialogo === AccionesEnum.Ver)" (click)="data.tipoDialogo = AccionesEnum.Modificar">Editar</button>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" class="btn-dialog">
+    <button
+      mat-stroked-button
+      color="accent"
+      *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+      (click)="data.tipoDialogo = AccionesEnum.Modificar"
+    >
+      Editar
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      *ngIf="data.tipoDialogo === AccionesEnum.Ver"
+      (click)="data.tipoDialogo = AccionesEnum.Eliminar"
+    >
+      Eliminar
+    </button>
+  </div>
 
-<h3 mat-dialog-title style="white-space: pre-wrap;">
-	{{AccionesEnum[data.tipoDialogo]}} datos vendedor.
-</h3>
+  <div mat-dialog-content>
+    <mat-form-field class="form-field-dialog">
+      <mat-label>Codigo Vendedor</mat-label>
+      <input
+        matInput
+        [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+        [(ngModel)]="data.vendedor.Cod_Vendedor"
+      />
+    </mat-form-field>
+  </div>
 
-<div mat-dialog-content>
-	<mat-form-field>
-		<mat-label>Codigo Vendedor</mat-label>
-		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Cod_Vendedor">
-	</mat-form-field>
-</div>
+  <div mat-dialog-content>
+    <mat-form-field class="form-field-dialog">
+      <mat-label>Nombre Vendedor</mat-label>
+      <input
+        matInput
+        [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+        [(ngModel)]="data.vendedor.Nombre_Vendedor"
+      />
+    </mat-form-field>
+  </div>
 
-<div mat-dialog-content>
-	<mat-form-field >
-		<mat-label>Nombre Vendedor</mat-label>
-		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Nombre_Vendedor">
-	</mat-form-field>
-</div>
+  <div mat-dialog-content>
+    <mat-form-field class="form-field-dialog">
+      <mat-label>Celular Vendedor</mat-label>
+      <input
+        matInput
+        [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+        [(ngModel)]="data.vendedor.Celular_Vendedor"
+      />
+    </mat-form-field>
+  </div>
 
-<div mat-dialog-content >
-	<mat-form-field>
-		<mat-label>Celular Vendedor</mat-label>
-		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Celular_Vendedor">
-	</mat-form-field>
-</div>
+  <div mat-dialog-content>
+    <mat-form-field class="form-field-dialog">
+      <mat-label>Correo Vendedor</mat-label>
+      <input
+        matInput
+        [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+        [(ngModel)]="data.vendedor.Mail_Vendedor"
+      />
+    </mat-form-field>
+  </div>
 
-<div mat-dialog-content >
-	<mat-form-field>
-		<mat-label >Correo Vendedor</mat-label>
-		<input matInput [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true" [(ngModel)]="data.vendedor.Mail_Vendedor">
-	</mat-form-field>
-</div>
-
-
-<div mat-dialog-actions >
-	<button mat-button (click)="onNoClick()" [disabled]="(data.tipoDialogo === AccionesEnum.Modificar)?false:true">Cancelar</button>
-	<!-- <button mat-button [mat-dialog-close]="data.valor" cdkFocusInitial>Aceptar</button> -->
-    <button mat-button cdkFocusInitial>Aceptar</button>
+  <div
+    mat-dialog-actions
+    class="btn-dialog"
+    fxLayoutAlign="space-evenly center"
+    *ngIf="data.tipoDialogo !== AccionesEnum.Ver"
+  >
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="onNoClick()"
+      [disabled]="data.tipoDialogo === AccionesEnum.Modificar ? false : true"
+    >
+      Cancelar
+    </button>
+    <!-- <button mat-button [mat-dialog-close]="data.valor" cdkFocusInitial>Aceptar</button> -->
+    <button
+      mat-stroked-button
+      color="accent"
+      [mat-dialog-close]
+      cdkFocusInitial
+    >
+      Aceptar
+    </button>
+  </div>
 </div>
